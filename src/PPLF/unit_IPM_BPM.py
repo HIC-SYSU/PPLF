@@ -225,25 +225,12 @@ class Decoder(nn.Module):
         self.block2 = Block(in_dim[1], in_dim[1])
         self.block1 = Block(in_dim[0], in_dim[0])
 
-        self.redu_conv4 = nn.Sequential(
-            nn.Conv2d(in_dim[3], in_dim[2], kernel_size=1),nn.ReLU()
-        )
-        self.redu_conv3 = nn.Sequential(
-            nn.Conv2d(in_dim[2], in_dim[1], kernel_size=1),nn.ReLU()
-        )
-        self.redu_conv2 = nn.Sequential(
-            nn.Conv2d(in_dim[1], in_dim[0], kernel_size=1),nn.ReLU()
-        )
-
     def forward(self, x1, x2, x3, x4, x5):
         y5 = self.conv(x5)
         y5_rev = 1 - y5
         feature4, y4, y4_rev = self.block4(x4, x5, y5, y5_rev)
-        feature4 = self.redu_conv4(feature4)
         feature3, y3, y3_rev = self.block3(x3, feature4, y4, y4_rev)
-        feature3 = self.redu_conv3(feature3)
         feature2, y2, y2_rev = self.block2(x2, feature3, y3, y3_rev)
-        feature2 = self.redu_conv2(feature2)
         feature1, y1, y1_rev = self.block1(x1, feature2, y2, y2_rev)
 
         return [y1, y2, y3, y4, y5], [y1_rev, y2_rev, y3_rev, y4_rev, y5_rev]
