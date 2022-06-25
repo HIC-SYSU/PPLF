@@ -1,4 +1,3 @@
-# PPLF
 # Progressive Perception Learning for Main Coronary Segmentation in X-ray Angiography
 Authors: Hongwei Zhang, Dong Zhang, Zhifan Gao, William Kongto Hau, Heye Zhang
 
