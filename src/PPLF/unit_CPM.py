@@ -323,13 +323,13 @@ class Encoder(nn.Module):
         self.stage1 = CPM1(in_channels,32,64)
         self.pool12 = nn.MaxPool2d(2,stride=2,ceil_mode=True)
 
-        self.stage2 = CPM2(64,32,128)
+        self.stage2 = CPM2(64,64,128)
         self.pool23 = nn.MaxPool2d(2,stride=2,ceil_mode=True)
 
-        self.stage3 = CPM3(128,64,256)
+        self.stage3 = CPM3(128,128,256)
         self.pool34 = nn.MaxPool2d(2,stride=2,ceil_mode=True)
 
-        self.stage4 = CPM4(256,128,512)
+        self.stage4 = CPM4(256,256,512)
 
         self.stage5 = CPM5(512,256,512)
 
